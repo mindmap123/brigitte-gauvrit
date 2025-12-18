@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tarifs | Brigitte Gauvrit</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Outfit:wght@200;300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --white: #ffffff;
+            --cream: #f8f7f5;
+            --light-gray: #e8e8e8;
+            --medium-gray: #b8b8b8;
+            --dark-gray: #6b6b6b;
+            --charcoal: #2a2a2a;
+            --black: #1a1a1a;
+            --accent: #c9a86c;
+            --accent-light: #dcc9a3;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Outfit', sans-serif; font-weight: 300; color: var(--charcoal); background: var(--white); line-height: 1.7; opacity: 0; animation: fadeIn 0.5s ease forwards; }
+        @keyframes fadeIn { to { opacity: 1; } }
+        body.fade-out { opacity: 0; transition: opacity 0.3s ease; }
+        h1, h2, h3, h4 { font-family: 'Cormorant Garamond', serif; font-weight: 400; }
+        h1 { font-size: clamp(2.5rem, 6vw, 4rem); }
+        h2 { font-size: clamp(1.8rem, 4vw, 2.5rem); margin-bottom: 1.5rem; }
+        h3 { font-size: clamp(1.2rem, 2vw, 1.5rem); margin-bottom: 1rem; }
+        p { font-size: 1rem; color: var(--dark-gray); }
+        nav { position: fixed; top: 0; left: 0; width: 100%; z-index: 1000; padding: 1.5rem 4%; display: flex; justify-content: space-between; align-items: center; background: rgba(255,255,255,0.98); box-shadow: 0 2px 30px rgba(0,0,0,0.05); }
+        .logo { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; color: var(--charcoal); text-decoration: none; letter-spacing: 0.1em; }
+        .nav-links { display: flex; gap: 3rem; list-style: none; }
+        .nav-links a { text-decoration: none; color: var(--charcoal); font-size: 0.85rem; letter-spacing: 0.15em; text-transform: uppercase; position: relative; transition: color 0.3s; }
+        .nav-links a::after { content: ''; position: absolute; bottom: -5px; left: 0; width: 0; height: 1px; background: var(--accent); transition: width 0.3s; }
+        .nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
+        .nav-links a:hover, .nav-links a.active { color: var(--accent); }
+        .menu-toggle { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 10px; }
+        .menu-toggle span { width: 25px; height: 1.5px; background: var(--charcoal); transition: all 0.3s; }
+        
+        .page-header { padding: 14rem 6% 8rem; background: linear-gradient(rgba(255, 255, 255, 0.55), rgba(255, 255, 255, 0.6)), url('photos/tarifs-hero.jpg') center 30%/cover no-repeat; text-align: center; min-height: 60vh; display: flex; flex-direction: column; justify-content: center; align-items: center; }
+        .page-header h1 { color: var(--charcoal); margin-bottom: 1.5rem; }
+        
+        section { padding: 5rem 6%; }
+        .pricing-section { max-width: 1100px; margin: 0 auto; }
+        
+        .pricing-category { margin-bottom: 5rem; }
+        .pricing-category-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--light-gray); }
+        .pricing-category-header h2 { margin-bottom: 0; }
+        .pricing-category-header a { font-size: 0.8rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent); text-decoration: none; transition: color 0.3s; }
+        .pricing-category-header a:hover { color: var(--charcoal); }
+        
+        .pricing-grid { display: grid; gap: 1.5rem; }
+        
+        .pricing-card { display: grid; grid-template-columns: 1fr auto auto; align-items: center; gap: 2rem; padding: 2rem; background: var(--white); border: 1px solid var(--light-gray); transition: all 0.3s; }
+        .pricing-card:hover { border-color: var(--accent); box-shadow: 0 10px 40px rgba(0,0,0,0.05); transform: translateY(-2px); background: var(--charcoal); }
+        .pricing-card:hover h3, .pricing-card:hover p { color: var(--white); }
+        .pricing-card:hover .pricing-amount { color: var(--accent); }
+        .pricing-card:hover .pricing-btn { background: var(--accent); color: var(--charcoal); }
+        .pricing-card:hover .pricing-btn:hover { background: var(--white); }
+        
+        .pricing-info h3 { font-size: 1.3rem; margin-bottom: 0.5rem; }
+        .pricing-info p { font-size: 0.9rem; margin: 0; }
+        
+        .pricing-amount { font-family: 'Cormorant Garamond', serif; font-size: 2.5rem; font-weight: 400; color: var(--charcoal); white-space: nowrap; }
+        .pricing-amount span { font-size: 1rem; color: var(--dark-gray); }
+        
+        .pricing-btn { padding: 0.8rem 2rem; background: var(--charcoal); color: var(--white); text-decoration: none; font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase; transition: all 0.3s; white-space: nowrap; }
+        .pricing-btn:hover { background: var(--accent); color: var(--charcoal); }
+        
+        .alt-section { background: var(--cream); }
+        
+        .cta-section { background: var(--charcoal); text-align: center; padding: 6rem; }
+        .cta-section h2 { color: var(--white); margin-bottom: 1rem; }
+        .cta-section p { color: var(--medium-gray); margin-bottom: 2rem; }
+        .cta-btn { display: inline-block; padding: 1rem 3rem; background: var(--accent); color: var(--charcoal); text-decoration: none; font-size: 0.8rem; letter-spacing: 0.2em; text-transform: uppercase; transition: all 0.4s; }
+        .cta-btn:hover { background: var(--white); }
+        
+        footer { background: var(--black); color: var(--white); padding: 4rem 6% 2rem; }
+        .footer-content { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 3rem; max-width: 1200px; margin: 0 auto 3rem; }
+        .footer-brand h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; margin-bottom: 1rem; }
+        .footer-brand p { color: var(--medium-gray); font-size: 0.9rem; }
+        .footer-links h4 { font-size: 0.8rem; letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 1rem; color: var(--accent); }
+        .footer-links ul { list-style: none; }
+        .footer-links li { margin-bottom: 0.6rem; }
+        .footer-links a { color: var(--medium-gray); text-decoration: none; font-size: 0.85rem; transition: color 0.3s; }
+        .footer-links a:hover { color: var(--accent); }
+        .footer-bottom { text-align: center; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.1); }
+        .footer-bottom p { font-size: 0.8rem; color: var(--dark-gray); }
+        
+        .whatsapp-btn { position: fixed; bottom: 2rem; right: 2rem; width: 60px; height: 60px; background: #25D366; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 20px rgba(37,211,102,0.4); transition: all 0.3s; z-index: 999; text-decoration: none; }
+        .whatsapp-btn:hover { transform: scale(1.1); }
+        .whatsapp-btn svg { width: 32px; height: 32px; fill: white; }
+        .whatsapp-tooltip { position: absolute; right: 70px; background: var(--charcoal); color: var(--white); padding: 0.5rem 1rem; font-size: 0.8rem; white-space: nowrap; border-radius: 4px; opacity: 0; transition: opacity 0.3s; }
+        .whatsapp-btn:hover .whatsapp-tooltip { opacity: 1; }
+        
+        @media (max-width: 768px) {
+            .nav-links { position: fixed; top: 0; right: -100%; width: 70%; height: 100vh; background: var(--white); flex-direction: column; justify-content: center; align-items: center; gap: 2rem; transition: right 0.4s; }
+            .nav-links.active { right: 0; }
+            .menu-toggle { display: flex; z-index: 1001; }
+            .menu-toggle.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+            .menu-toggle.active span:nth-child(2) { opacity: 0; }
+            .menu-toggle.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+            section { padding: 4rem 5%; }
+            .page-header { padding: 10rem 5% 4rem; }
+            .pricing-card { grid-template-columns: 1fr; gap: 1rem; text-align: center; }
+            .pricing-btn { width: 100%; text-align: center; }
+            .menu-toggle.active span { background: var(--white); }
+            .nav-links { position: fixed; top: 0; left: 0; right: 0; bottom: 0; width: 100%; height: 100vh; background: var(--charcoal); flex-direction: column; justify-content: center; align-items: center; gap: 1.5rem; transform: translateX(100%); transition: transform 0.4s ease; padding: 2rem; }
+            .nav-links.active { transform: translateX(0); }
+            .nav-links a { color: var(--white); font-size: 1rem; }
+            .logo { font-size: clamp(1.2rem, 4vw, 1.6rem); }
+            .mobile-logo { display: block !important; margin-bottom: 1.5rem; }
+            .mobile-logo .logo { font-size: clamp(1.4rem, 5vw, 1.8rem); color: var(--white); }
+            .mobile-instagram { display: block !important; margin-top: 1.5rem; }
+            .mobile-instagram a { color: var(--accent); }
+            .mobile-instagram svg { width: clamp(24px, 6vw, 32px); height: clamp(24px, 6vw, 32px); }
+        }
+        
+        .mobile-logo, .mobile-instagram { display: none; } .fade-in { opacity: 0; transform: translateY(20px); transition: all 0.6s; }
+        .fade-in.visible { opacity: 1; transform: translateY(0); }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="index.html" class="logo">Brigitte Gauvrit</a>
+        <ul class="nav-links" id="navLinks"><li class="mobile-logo"><a href="index.html" class="logo">Brigitte Gauvrit</a></li>
+            <li><a href="index.html">Accueil</a></li>
+            <li><a href="extensions.html">Extensions</a></li>
+            <li><a href="volume-russe.html">Volume Russe</a></li>
+            <li><a href="rehaussement.html">Rehaussement</a></li>
+            <li><a href="tarifs.html" class="active">Tarifs</a></li>
+            <li><a href="contact.html">Contact</a></li><li class="mobile-instagram"><a href="https://www.instagram.com/maquillagepermanentls/" target="_blank"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></a></li>
+        </ul>
+        <div class="menu-toggle" id="menuToggle"><span></span><span></span><span></span></div>
+    </nav>
+
+    <header class="page-header">
+        <h1>Tarifs</h1>
+    </header>
+
+    <section class="pricing-section">
+        <!-- Extensions de Cils -->
+        <div class="pricing-category fade-in">
+            <div class="pricing-category-header">
+                <h2>Extensions de Cils</h2>
+                <a href="extensions.html">En savoir plus →</a>
+            </div>
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <div class="pricing-info">
+                        <h3>Pose Découverte</h3>
+                        <p>Un résultat naturel pour sublimer votre regard en douceur.</p>
+                    </div>
+                    <div class="pricing-amount">80 €</div>
+                    <a href="contact.html" class="pricing-btn">Réserver</a>
+                </div>
+                <div class="pricing-card">
+                    <div class="pricing-info">
+                        <h3>Pose Complète</h3>
+                        <p>Effet mascara intense, cils à cils sur la totalité de la frange.</p>
+                    </div>
+                    <div class="pricing-amount">120 €</div>
+                    <a href="contact.html" class="pricing-btn">Réserver</a>
+                </div>
+                <div class="pricing-card">
+                    <div class="pricing-info">
+                        <h3>Retouche d'entretien (2 semaines)</h3>
+                        <p>Maintien de votre pose pour un regard toujours parfait.</p>
+                    </div>
+                    <div class="pricing-amount">30 €</div>
+                    <a href="contact.html" class="pricing-btn">Réserver</a>
+                </div>
+                <div class="pricing-card">
+                    <div class="pricing-info">
+                        <h3>Retouche d'entretien (3 semaines)</h3>
+                        <p>Rafraîchissement de votre pose après 3 semaines.</p>
+                    </div>
+                    <div class="pricing-amount">50 €</div>
+                    <a href="contact.html" class="pricing-btn">Réserver</a>
+                </div>
+                <div class="pricing-card">
+                    <div class="pricing-info">
+                        <h3>Retouche d'entretien (4/5 semaines)</h3>
+                        <p>Renouvellement complet de votre pose.</p>
+                    </div>
+                    <div class="pricing-amount">75 €</div>
+                    <a href="contact.html" class="pricing-btn">Réserver</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Volume Russe -->
+        <div class="pricing-category fade-in">
+            <div class="pricing-category-header">
+                <h2>Volume Russe</h2>
+                <a href="volume-russe.html">En savoir plus →</a>
+            </div>
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <div class="pricing-info">
+                        <h3>Pose Complète Volume Russe</h3>
+                        <p>Volume intense et glamour grâce à des bouquets faits main.</p>
+                    </div>
+                    <div class="pricing-amount">190 €</div>
+                    <a href="contact.html" class="pricing-btn">Réserver</a>
+                </div>
+                <div class="pricing-card">
+                    <div class="pricing-info">
+                        <h3>Retouche d'entretien (2 semaines)</h3>
+                        <p>Maintien de votre volume pour un regard intense.</p>
+                    </div>
+                    <div class="pricing-amount">30 €</div>
+                    <a href="contact.html" class="pricing-btn">Réserver</a>
+                </div>
+                <div class="pricing-card">
+                    <div class="pricing-info">
+                        <h3>Retouche d'entretien (3 semaines)</h3>
+                        <p>Rafraîchissement de votre volume russe.</p>
+                    </div>
+                    <div class="pricing-amount">50 €</div>
+                    <a href="contact.html" class="pricing-btn">Réserver</a>
+                </div>
+                <div class="pricing-card">
+                    <div class="pricing-info">
+                        <h3>Retouche d'entretien (4/5 semaines)</h3>
+                        <p>Renouvellement complet de votre volume.</p>
+                    </div>
+                    <div class="pricing-amount">75 €</div>
+                    <a href="contact.html" class="pricing-btn">Réserver</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Rehaussement de Cils -->
+        <div class="pricing-category fade-in">
+            <div class="pricing-category-header">
+                <h2>Rehaussement de Cils</h2>
+                <a href="rehaussement.html">En savoir plus →</a>
+            </div>
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <div class="pricing-info">
+                        <h3>Rehaussement de cils</h3>
+                        <p>Courbure naturelle de vos propres cils pour 6 à 8 semaines.</p>
+                    </div>
+                    <div class="pricing-amount">50 €</div>
+                    <a href="contact.html" class="pricing-btn">Réserver</a>
+                </div>
+                <div class="pricing-card">
+                    <div class="pricing-info">
+                        <h3>Rehaussement + Teinture</h3>
+                        <p>Courbure et coloration noire intense pour un effet maquillé.</p>
+                    </div>
+                    <div class="pricing-amount">65 €</div>
+                    <a href="contact.html" class="pricing-btn">Réserver</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sourcils & Brow Lift -->
+        <div class="pricing-category fade-in">
+            <div class="pricing-category-header">
+                <h2>Sourcils & Brow Lift</h2>
+                <a href="rehaussement.html#browlift">En savoir plus →</a>
+            </div>
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <div class="pricing-info">
+                        <h3>Le Brow Lift</h3>
+                        <p>Restructure et discipline les sourcils pour un regard ouvert.</p>
+                    </div>
+                    <div class="pricing-amount">65 €</div>
+                    <a href="contact.html" class="pricing-btn">Réserver</a>
+                </div>
+                <div class="pricing-card">
+                    <div class="pricing-info">
+                        <h3>Le Brow Lift avec teinture</h3>
+                        <p>Discipline et intensité pour des sourcils parfaits.</p>
+                    </div>
+                    <div class="pricing-amount">75 €</div>
+                    <a href="contact.html" class="pricing-btn">Réserver</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section fade-in">
+        <h2>Prête à sublimer votre regard ?</h2>
+        <p>Prenez rendez-vous dès maintenant pour votre prochaine séance.</p>
+        <a href="contact.html" class="cta-btn">Prendre rendez-vous</a>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-brand"><h3>Brigitte Gauvrit</h3><p>Spécialiste du regard</p></div>
+            <div class="footer-links">
+                <h4>Navigation</h4>
+                <ul>
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="extensions.html">Extensions de cils</a></li>
+                    <li><a href="volume-russe.html">Volume Russe</a></li>
+                    <li><a href="rehaussement.html">Rehaussement</a></li>
+                    <li><a href="tarifs.html">Tarifs</a></li>
+                    <li><a href="contact.html">Contact</a></li><li class="mobile-instagram"><a href="https://www.instagram.com/maquillagepermanentls/" target="_blank"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></a></li>
+                </ul>
+            </div>
+            <div class="footer-links"><h4>Contact</h4><ul><li><a href="contact.html">Nous contacter</a></li></ul></div>
+        </div>
+        <div class="footer-bottom"><p>© 2025 Brigitte Gauvrit. Tous droits réservés.</p></div>
+    </footer>
+
+    <a href="https://wa.me/33616361029" class="whatsapp-btn" target="_blank">
+        <span class="whatsapp-tooltip">Contactez-nous sur WhatsApp</span>
+        <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+    </a>
+
+    <script>
+        const menuToggle = document.getElementById('menuToggle');
+        const navLinks = document.getElementById('navLinks');
+        menuToggle.addEventListener('click', () => { menuToggle.classList.toggle('active'); navLinks.classList.toggle('active'); });
+        navLinks.querySelectorAll('a').forEach(link => { link.addEventListener('click', () => { menuToggle.classList.remove('active'); navLinks.classList.remove('active'); }); });
+        const fadeElements = document.querySelectorAll('.fade-in');
+        const observer = new IntersectionObserver((entries) => { entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); }); }, { threshold: 0.1 });
+        fadeElements.forEach(el => observer.observe(el));
+        document.querySelectorAll('a[href]').forEach(link => { if (link.hostname === window.location.hostname && !link.hash) { link.addEventListener('click', (e) => { e.preventDefault(); document.body.classList.add('fade-out'); setTimeout(() => { window.location.href = link.href; }, 300); }); } });
+    </script>
+</body>
+</html>
