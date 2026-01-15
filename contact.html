@@ -1,177 +1,317 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact | Brigitte Gauvrit</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Outfit:wght@200;300;400;500&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Outfit:wght@200;300;400;500&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
     <style>
-        :root { --white: #ffffff; --cream: #f8f7f5; --light-gray: #e8e8e8; --medium-gray: #b8b8b8; --dark-gray: #6b6b6b; --charcoal: #2a2a2a; --black: #1a1a1a; --accent: #c9a86c; }
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        html { scroll-behavior: smooth; }
-        body { font-family: 'Outfit', sans-serif; font-weight: 300; color: var(--charcoal); background: var(--white); line-height: 1.7; opacity: 0; animation: fadeIn 0.5s ease forwards; }
-        @keyframes fadeIn { to { opacity: 1; } }
-        body.fade-out { opacity: 0; transition: opacity 0.3s ease; }
-        h1, h2, h3, h4 { font-family: 'Cormorant Garamond', serif; font-weight: 400; }
-        h1 { font-size: clamp(2.5rem, 6vw, 4rem); }
-        h2 { font-size: clamp(1.8rem, 4vw, 2.5rem); margin-bottom: 1.5rem; }
-        p { font-size: 1rem; color: var(--dark-gray); }
-        nav { position: fixed; top: 0; left: 0; width: 100%; z-index: 1000; padding: 1.5rem 4%; display: flex; justify-content: space-between; align-items: center; background: rgba(255,255,255,0.98); box-shadow: 0 2px 30px rgba(0,0,0,0.05); }
-        .logo { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; color: var(--charcoal); text-decoration: none; letter-spacing: 0.1em; }
-        .nav-links { display: flex; gap: 3rem; list-style: none; }
-        .nav-links a { text-decoration: none; color: var(--charcoal); font-size: 0.85rem; letter-spacing: 0.15em; text-transform: uppercase; position: relative; transition: color 0.3s; }
-        .nav-links a::after { content: ''; position: absolute; bottom: -5px; left: 0; width: 0; height: 1px; background: var(--accent); transition: width 0.3s; }
-        .nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
-        .nav-links a:hover, .nav-links a.active { color: var(--accent); }
-        .menu-toggle { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 10px; }
-        .menu-toggle span { width: 25px; height: 1.5px; background: var(--charcoal); transition: all 0.3s; }
-        .page-header { padding: 14rem 6% 8rem; background: linear-gradient(rgba(255, 255, 255, 0.55), rgba(255, 255, 255, 0.6)), url('photos/contact-hero.jpg') center 30%/cover no-repeat; text-align: center; min-height: 60vh; display: flex; flex-direction: column; justify-content: center; align-items: center; }
-        .page-header h1 { color: var(--charcoal); margin-bottom: 1.5rem; }
-        .page-header p { max-width: 600px; margin: 0 auto; font-size: 1.1rem; color: var(--dark-gray); }
-        section { padding: 6rem 6%; }
-        .contact-container { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; max-width: 1200px; margin: 0 auto; }
-        .contact-info h2 { margin-bottom: 2rem; }
-        .contact-info > p { margin-bottom: 1.5rem; line-height: 1.9; }
-        .info-item { display: flex; gap: 1.5rem; margin-bottom: 2rem; padding: 1.5rem; background: var(--cream); transition: all 0.3s; }
-        .info-item:hover { transform: translateX(5px); }
-        .info-icon { width: 24px; height: 24px; stroke: var(--accent); stroke-width: 1.5; fill: none; flex-shrink: 0; margin-top: 0.2rem; }
-        .info-item h4 { font-size: 1.1rem; margin-bottom: 0.3rem; color: var(--charcoal); }
-        .info-item p { font-size: 0.95rem; margin: 0; }
-        
-        .whatsapp-question { background: #25D366; padding: 2rem; margin-top: 2rem; display: flex; align-items: center; gap: 1.5rem; text-decoration: none; transition: all 0.3s; border-radius: 8px; }
-        .whatsapp-question:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(37,211,102,0.3); }
-        .whatsapp-question svg { width: 50px; height: 50px; fill: var(--white); flex-shrink: 0; }
-        .whatsapp-question-content h4 { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; color: var(--white); margin-bottom: 0.3rem; font-weight: 400; }
-        .whatsapp-question-content p { color: rgba(255,255,255,0.85); font-size: 0.95rem; margin: 0; }
-        
-        .map-container { margin-top: 3rem; }
-        .map-container h3 { font-size: 1.3rem; margin-bottom: 1rem; color: var(--charcoal); }
-        .map-wrapper { width: 100%; height: 300px; background: var(--cream); overflow: hidden; border: 1px solid var(--light-gray); }
-        .map-wrapper iframe { width: 100%; height: 100%; border: 0; }
-        
-        .contact-form { background: var(--cream); padding: 3rem; }
-        .contact-form h3 { font-size: 1.5rem; margin-bottom: 2rem; }
-        .form-group { margin-bottom: 1.5rem; }
-        .form-group label { display: block; font-size: 0.8rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--charcoal); margin-bottom: 0.5rem; }
-        .form-group input, .form-group textarea, .form-group select { width: 100%; padding: 1rem; border: 1px solid var(--light-gray); background: var(--white); font-family: 'Outfit', sans-serif; font-size: 1rem; font-weight: 300; color: var(--charcoal); transition: border-color 0.3s; }
-        .form-group input:focus, .form-group textarea:focus, .form-group select:focus { outline: none; border-color: var(--accent); }
-        .form-group textarea { min-height: 150px; resize: vertical; }
-        .form-submit { padding: 1rem 3rem; background: var(--charcoal); color: var(--white); border: none; font-family: 'Outfit', sans-serif; font-size: 0.8rem; letter-spacing: 0.2em; text-transform: uppercase; cursor: pointer; transition: all 0.4s; width: 100%; }
-        .form-submit:hover { background: var(--accent); color: var(--charcoal); }
-        footer { background: var(--black); color: var(--white); padding: 4rem 6% 2rem; }
-        .footer-content { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 3rem; max-width: 1200px; margin: 0 auto 3rem; }
-        .footer-brand h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; margin-bottom: 1rem; }
-        .footer-brand p { color: var(--medium-gray); font-size: 0.9rem; }
-        .footer-links h4 { font-size: 0.8rem; letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 1rem; color: var(--accent); }
-        .footer-links ul { list-style: none; }
-        .footer-links li { margin-bottom: 0.6rem; color: var(--medium-gray); font-size: 0.85rem; }
-        .footer-links a { color: var(--medium-gray); text-decoration: none; font-size: 0.85rem; transition: color 0.3s; }
-        .footer-links a:hover { color: var(--accent); }
-        .footer-bottom { text-align: center; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.1); }
-        .footer-bottom p { font-size: 0.8rem; color: var(--dark-gray); }
-        .whatsapp-btn { position: fixed; bottom: 2rem; right: 2rem; width: 60px; height: 60px; background: #25D366; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 20px rgba(37,211,102,0.4); transition: all 0.3s; z-index: 999; text-decoration: none; }
-        .whatsapp-btn:hover { transform: scale(1.1); }
-        .whatsapp-btn svg { width: 32px; height: 32px; fill: white; }
-        .whatsapp-tooltip { position: absolute; right: 70px; background: var(--charcoal); color: var(--white); padding: 0.5rem 1rem; font-size: 0.8rem; white-space: nowrap; border-radius: 4px; opacity: 0; transition: opacity 0.3s; }
-        .whatsapp-btn:hover .whatsapp-tooltip { opacity: 1; }
-        @media (max-width: 768px) {
-            .nav-links { position: fixed; top: 0; right: -100%; width: 70%; height: 100vh; background: var(--white); flex-direction: column; justify-content: center; align-items: center; gap: 2rem; transition: right 0.4s; }
-            .nav-links.active { right: 0; }
-            .menu-toggle { display: flex; z-index: 1001; }
-            .menu-toggle.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
-            .menu-toggle.active span:nth-child(2) { opacity: 0; }
-            .menu-toggle.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
-            section { padding: 4rem 5%; }
-            .page-header { padding: 10rem 5% 4rem; }
-            .contact-container { grid-template-columns: 1fr; }
-            .map-wrapper { height: 250px; }
-            .menu-toggle.active span { background: var(--white); }
-            .nav-links { position: fixed; top: 0; left: 0; right: 0; bottom: 0; width: 100%; height: 100vh; background: var(--charcoal); flex-direction: column; justify-content: center; align-items: center; gap: 1.5rem; transform: translateX(100%); transition: transform 0.4s ease; padding: 2rem; }
-            .nav-links.active { transform: translateX(0); }
-            .nav-links a { color: var(--white); font-size: 1rem; }
-            .logo { font-size: clamp(1.2rem, 4vw, 1.6rem); }
-            .mobile-logo { display: block !important; margin-bottom: 1.5rem; }
-            .mobile-logo .logo { font-size: clamp(1.4rem, 5vw, 1.8rem); color: var(--white); }
-            .mobile-instagram { display: block !important; margin-top: 1.5rem; }
-            .mobile-instagram a { color: var(--accent); }
-            .mobile-instagram svg { width: clamp(24px, 6vw, 32px); height: clamp(24px, 6vw, 32px); }
+        /* Specific Page Header */
+        .page-header {
+            padding: 18rem 6% 12rem;
+            background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('photos/contact-hero.jpg') center 30%/cover no-repeat;
+            text-align: center;
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
-        .mobile-logo, .mobile-instagram { display: none; } .fade-in { opacity: 0; transform: translateY(20px); transition: all 0.6s; }
-        .fade-in.visible { opacity: 1; transform: translateY(0); }
+        
+        /* Mobile optimization for contact hero */
+        @media (max-width: 768px) {
+            .page-header {
+                background-position: center 25% !important;
+                background-size: cover !important;
+                padding: 12rem 5% 8rem;
+                min-height: 60vh;
+            }
+        }
+
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .info-item {
+            display: flex;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            background: var(--cream);
+            transition: all 0.3s;
+        }
+
+        .info-item:hover {
+            transform: translateX(5px);
+        }
+
+        .info-icon {
+            width: 24px;
+            height: 24px;
+            stroke: var(--accent);
+            stroke-width: 1.5;
+            fill: none;
+            flex-shrink: 0;
+            margin-top: 0.2rem;
+        }
+
+        .whatsapp-question {
+            background: #25D366;
+            padding: 2rem;
+            margin-top: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            text-decoration: none;
+            transition: all 0.3s;
+            border-radius: 8px;
+        }
+
+        .whatsapp-question:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(37, 211, 102, 0.3);
+        }
+
+        .whatsapp-question svg {
+            width: 50px;
+            height: 50px;
+            fill: var(--white);
+            flex-shrink: 0;
+        }
+
+        .whatsapp-question-content h4 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            color: var(--white);
+            margin-bottom: 0.3rem;
+            font-weight: 400;
+        }
+
+        .whatsapp-question-content p {
+            color: rgba(255, 255, 255, 0.85);
+            font-size: 0.95rem;
+            margin: 0;
+        }
+
+        .map-wrapper {
+            width: 100%;
+            height: 300px;
+            background: var(--cream);
+            overflow: hidden;
+            border: 1px solid var(--light-gray);
+        }
+
+        .map-wrapper iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        .contact-form {
+            background: var(--cream);
+            padding: 3rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.8rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--charcoal);
+            margin-bottom: 0.5rem;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 1rem;
+            border: 1px solid var(--light-gray);
+            background: var(--white);
+            font-family: 'Outfit', sans-serif;
+            font-size: 1rem;
+            font-weight: 300;
+            color: var(--charcoal);
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .form-submit {
+            padding: 1rem 3rem;
+            background: var(--charcoal);
+            color: var(--white);
+            border: none;
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.8rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.4s;
+            width: 100%;
+        }
+
+        .form-submit:hover {
+            background: var(--accent);
+            color: var(--charcoal);
+        }
+
+        @media (max-width: 768px) {
+            .contact-container {
+                grid-template-columns: 1fr;
+            }
+
+            .map-wrapper {
+                height: 250px;
+            }
+        }
+
+        /* Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
     </style>
 </head>
+
 <body>
-    <nav>
+    <nav id="navbar" class="glass-panel nav-light">
         <a href="index.html" class="logo">Brigitte Gauvrit</a>
-        <ul class="nav-links" id="navLinks"><li class="mobile-logo"><a href="index.html" class="logo">Brigitte Gauvrit</a></li>
+        <ul class="nav-links" id="navLinks">
+            <div class="mobile-logo">Brigitte Gauvrit</div>
             <li><a href="index.html">Accueil</a></li>
             <li><a href="extensions.html">Extensions</a></li>
             <li><a href="volume-russe.html">Volume Russe</a></li>
             <li><a href="rehaussement.html">Rehaussement</a></li>
             <li><a href="tarifs.html">Tarifs</a></li>
             <li><a href="contact.html" class="active">Contact</a></li>
+            <div class="mobile-social">
+                <a href="https://wa.me/33616361029" target="_blank" class="social-icon">
+                    <svg viewBox="0 0 24 24" width="30" height="30" fill="currentColor">
+                        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+                    </svg>
+                </a>
+                <a href="https://www.instagram.com/maquillagepermanentls/" target="_blank" class="social-icon">
+                    <svg viewBox="0 0 24 24" width="30" height="30" fill="currentColor">
+                        <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                    </svg>
+                </a>
+            </div>
         </ul>
         <div class="menu-toggle" id="menuToggle"><span></span><span></span><span></span></div>
     </nav>
 
     <header class="page-header">
-        <h1>Contact</h1>
+        <div class="glass-panel glass-title-container">
+            <h1>Contact</h1>
+        </div>
     </header>
 
     <section>
         <div class="contact-container">
             <div class="contact-info fade-in">
                 <h2>Restons en contact</h2>
-                <p>Je serai ravie de répondre à toutes vos questions concernant mes prestations et de vous accompagner dans le choix du soin le plus adapté à vos besoins.</p>
-                
+                <p>Je serai ravie de répondre à toutes vos questions concernant mes prestations et de vous accompagner
+                    dans le choix du soin le plus adapté à vos besoins.</p>
+
                 <div class="info-item">
-                    <svg class="info-icon" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                    <svg class="info-icon" viewBox="0 0 24 24">
+                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                        <circle cx="12" cy="10" r="3" />
+                    </svg>
                     <div>
                         <h4>Adresse</h4>
                         <p>Brigitte Gauvrit<br>1 rue de la maisonnette<br>85100 LES SABLES D'OLONNE</p>
                     </div>
                 </div>
-                
+
                 <div class="info-item">
-                    <svg class="info-icon" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                    <svg class="info-icon" viewBox="0 0 24 24">
+                        <path
+                            d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+                    </svg>
                     <div>
                         <h4>Téléphone</h4>
                         <p>06 16 36 10 29</p>
                     </div>
                 </div>
-                
+
                 <div class="info-item">
-                    <svg class="info-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                    <svg class="info-icon" viewBox="0 0 24 24">
+                        <circle cx="12" cy="12" r="10" />
+                        <polyline points="12 6 12 12 16 14" />
+                    </svg>
                     <div>
                         <h4>Horaires</h4>
-                        <p>Du lundi au samedi<br>Sur rendez-vous</p>
+                        <p>Du lundi au vendredi<br>Sur rendez-vous</p>
                     </div>
                 </div>
-                
+
                 <a href="https://wa.me/33616361029" class="whatsapp-question" target="_blank">
-                    <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                    <svg viewBox="0 0 24 24">
+                        <path
+                            d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+                    </svg>
                     <div class="whatsapp-question-content">
                         <h4>Une question ?</h4>
                         <p>Contactez-moi directement sur WhatsApp</p>
                     </div>
                 </a>
-                
+
                 <div class="map-container">
-                    <a href="https://www.google.com/maps/dir/?api=1&destination=1+rue+de+la+maisonnette+85100+les+sables+d%27olonne" target="_blank" style="display: inline-block; margin-top: 1rem; padding: 1rem 2rem; background: var(--charcoal); color: var(--white); text-decoration: none; font-size: 0.85rem; letter-spacing: 0.15em; text-transform: uppercase; transition: all 0.3s;">Itinéraire vers le salon →</a>
+                    <a href="https://www.google.com/maps/dir/?api=1&destination=1+rue+de+la+maisonnette+85100+les+sables+d%27olonne"
+                        target="_blank"
+                        style="display: inline-block; margin-top: 1rem; padding: 1rem 2rem; background: var(--charcoal); color: var(--white); text-decoration: none; font-size: 0.85rem; letter-spacing: 0.15em; text-transform: uppercase; transition: all 0.3s;">Itinéraire
+                        vers le salon →</a>
                     <div class="map-wrapper" style="margin-top: 1.5rem;">
-                        <iframe src="https://maps.google.com/maps?q=1+rue+de+la+maisonnette+85100+les+sables+d%27olonne&t=&z=15&ie=UTF8&iwloc=&output=embed" allowfullscreen="" loading="lazy"></iframe>
+                        <iframe
+                            src="https://maps.google.com/maps?q=1+rue+de+la+maisonnette+85100+les+sables+d%27olonne&t=&z=15&ie=UTF8&iwloc=&output=embed"
+                            allowfullscreen="" loading="lazy"></iframe>
                     </div>
                 </div>
             </div>
-            
+
             <div class="contact-form fade-in">
                 <h3>Envoyer un message</h3>
-                <form action="#" method="POST">
+                <form action="#" method="POST" id="contactForm">
+                    <!-- Honeypot field (hidden from users, visible to bots) -->
+                    <div style="position: absolute; left: -9999px; opacity: 0; pointer-events: none;">
+                        <label for="website">Site web (ne pas remplir)</label>
+                        <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
+                    </div>
+                    
                     <div class="form-group">
                         <label for="name">Nom complet</label>
-                        <input type="text" id="name" name="name" required>
+                        <input type="text" id="name" name="name" required minlength="2" maxlength="50">
                     </div>
                     <div class="form-group">
                         <label for="email">Email</label>
@@ -179,15 +319,15 @@
                     </div>
                     <div class="form-group">
                         <label for="phone">Téléphone</label>
-                        <input type="tel" id="phone" name="phone">
+                        <input type="tel" id="phone" name="phone" pattern="[0-9\s\-\+\(\)\.]{10,15}">
                     </div>
                     <div class="form-group">
                         <label for="service">Prestation souhaitée</label>
                         <select id="service" name="service">
                             <option value="">Sélectionnez une prestation</option>
                             <option value="extensions-decouverte">Extensions - Pose Découverte (80€)</option>
-                            <option value="extensions-complete">Extensions - Pose Complète (120€)</option>
-                            <option value="volume-russe">Volume Russe (190€)</option>
+                            <option value="extensions-complete">Extensions - Pose Complète (100€)</option>
+                            <option value="volume-russe">Volume Russe (120€)</option>
                             <option value="rehaussement">Rehaussement de cils (50€)</option>
                             <option value="rehaussement-teinture">Rehaussement + Teinture (65€)</option>
                             <option value="brow-lift">Brow Lift (65€)</option>
@@ -198,9 +338,22 @@
                     </div>
                     <div class="form-group">
                         <label for="message">Message</label>
-                        <textarea id="message" name="message" placeholder="Décrivez votre demande ou posez vos questions..."></textarea>
+                        <textarea id="message" name="message" required minlength="10" maxlength="1000"
+                            placeholder="Décrivez votre demande ou posez vos questions..."></textarea>
                     </div>
-                    <button type="submit" class="form-submit">Envoyer le message</button>
+                    
+                    <!-- Simple Math CAPTCHA -->
+                    <div class="form-group">
+                        <label for="captcha">Vérification anti-spam : <span id="mathQuestion"></span></label>
+                        <input type="number" id="captcha" name="captcha" required min="0" max="20">
+                    </div>
+                    
+                    <!-- Rate limiting notice -->
+                    <div class="form-notice">
+                        <small>Pour éviter le spam, vous ne pouvez envoyer qu'un message toutes les 5 minutes.</small>
+                    </div>
+                    
+                    <button type="submit" class="form-submit" id="submitBtn">Envoyer le message</button>
                 </form>
             </div>
         </div>
@@ -220,7 +373,12 @@
                     <li><a href="volume-russe.html">Volume Russe</a></li>
                     <li><a href="rehaussement.html">Rehaussement</a></li>
                     <li><a href="tarifs.html">Tarifs</a></li>
-                    <li><a href="contact.html">Contact</a></li><li class="mobile-instagram"><a href="https://www.instagram.com/maquillagepermanentls/" target="_blank"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li class="mobile-instagram"><a href="https://www.instagram.com/maquillagepermanentls/"
+                            target="_blank"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                <path
+                                    d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+                            </svg></a></li>
                 </ul>
             </div>
             <div class="footer-links">
@@ -238,18 +396,59 @@
 
     <a href="https://wa.me/33616361029" class="whatsapp-btn" target="_blank">
         <span class="whatsapp-tooltip">Une question ?</span>
-        <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        <svg viewBox="0 0 24 24">
+            <path
+                d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+        </svg>
     </a>
 
+    <script src="nav-color-detector.js"></script>
+    <script src="contact-security.js"></script>
     <script>
         const menuToggle = document.getElementById('menuToggle');
         const navLinks = document.getElementById('navLinks');
-        menuToggle.addEventListener('click', () => { menuToggle.classList.toggle('active'); navLinks.classList.toggle('active'); });
-        navLinks.querySelectorAll('a').forEach(link => { link.addEventListener('click', () => { menuToggle.classList.remove('active'); navLinks.classList.remove('active'); }); });
+        const body = document.body;
+
+        function openMenu() {
+            menuToggle.classList.add('active');
+            navLinks.classList.add('active');
+            body.classList.add('menu-open');
+        }
+
+        function closeMenu() {
+            menuToggle.classList.remove('active');
+            navLinks.classList.remove('active');
+            body.classList.remove('menu-open');
+        }
+
+        menuToggle.addEventListener('click', () => {
+            if (navLinks.classList.contains('active')) {
+                closeMenu();
+            } else {
+                openMenu();
+            }
+        });
+
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', closeMenu);
+        });
+
+        navLinks.addEventListener('click', (e) => {
+            if (e.target === navLinks) {
+                closeMenu();
+            }
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && navLinks.classList.contains('active')) {
+                closeMenu();
+            }
+        });
+
         const fadeElements = document.querySelectorAll('.fade-in');
         const observer = new IntersectionObserver((entries) => { entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); }); }, { threshold: 0.1 });
         fadeElements.forEach(el => observer.observe(el));
-        document.querySelectorAll('a[href]').forEach(link => { if (link.hostname === window.location.hostname && !link.hash) { link.addEventListener('click', (e) => { e.preventDefault(); document.body.classList.add('fade-out'); setTimeout(() => { window.location.href = link.href; }, 300); }); } });
     </script>
 </body>
+
 </html>
