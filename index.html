@@ -307,6 +307,12 @@
         const navLinks = document.getElementById('navLinks');
         const body = document.body;
 
+        // Afficher le hamburger initialement pendant 3 secondes
+        menuToggle.classList.add('show-initially');
+        setTimeout(() => {
+            menuToggle.classList.remove('show-initially');
+        }, 3000);
+
         function openMenu() {
             menuToggle.classList.add('active');
             navLinks.classList.add('active');
@@ -344,6 +350,21 @@
             if (e.key === 'Escape' && navLinks.classList.contains('active')) {
                 closeMenu();
             }
+        });
+
+        // Afficher le hamburger au scroll vers le haut
+        let lastScrollY = window.scrollY;
+        window.addEventListener('scroll', () => {
+            if (window.scrollY < lastScrollY && window.scrollY > 100) {
+                // Scroll vers le haut - montrer le hamburger temporairement
+                menuToggle.classList.add('show-initially');
+                setTimeout(() => {
+                    if (!menuToggle.classList.contains('active')) {
+                        menuToggle.classList.remove('show-initially');
+                    }
+                }, 2000);
+            }
+            lastScrollY = window.scrollY;
         });
 
         // Fade in animation on scroll

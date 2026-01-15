@@ -227,6 +227,12 @@
         const navLinks = document.getElementById('navLinks');
         const body = document.body;
 
+        // Afficher le hamburger initialement pendant 3 secondes
+        menuToggle.classList.add('show-initially');
+        setTimeout(() => {
+            menuToggle.classList.remove('show-initially');
+        }, 3000);
+
         function openMenu() {
             menuToggle.classList.add('active');
             navLinks.classList.add('active');
@@ -247,23 +253,34 @@
             }
         });
 
-        // Close menu when clicking a link
         navLinks.querySelectorAll('a').forEach(link => {
             link.addEventListener('click', closeMenu);
         });
 
-        // Close menu when clicking outside (on the backdrop)
         navLinks.addEventListener('click', (e) => {
             if (e.target === navLinks) {
                 closeMenu();
             }
         });
 
-        // Close menu on escape key
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape' && navLinks.classList.contains('active')) {
                 closeMenu();
             }
+        });
+
+        // Afficher le hamburger au scroll vers le haut
+        let lastScrollY = window.scrollY;
+        window.addEventListener('scroll', () => {
+            if (window.scrollY < lastScrollY && window.scrollY > 100) {
+                menuToggle.classList.add('show-initially');
+                setTimeout(() => {
+                    if (!menuToggle.classList.contains('active')) {
+                        menuToggle.classList.remove('show-initially');
+                    }
+                }, 2000);
+            }
+            lastScrollY = window.scrollY;
         });
 
         // Fade in animation
